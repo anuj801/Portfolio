@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact<span>Me</span></h2>
+      
+        <form id="contactForm">
+          <div class="input-box">
+            <input type="text" name="fullName" placeholder="Enter Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+          </div>
+          <div class="input-box">
+            <input type="number" name="phoneNumber" placeholder="Phone Number" required>
+            <input type="text" name="emailSubject" placeholder="Email Subject" required>
+          </div>
+          <textarea name="message" cols="30" placeholder="Your Message" required></textarea>
+          <input type="submit" value="Send Message" class="btn">
+        </form>
+      
+        <!-- Use the latest version of EmailJS SDK -->
+        <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+        
+        <script type="text/javascript">
+          (function () {
+            emailjs.init("lUM02_3qxSqH3135i"); // Your EmailJS Public Key
+          })();
+      
+          document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+      
+            // Collect form data
+            const formData = {
+              fullName: this.fullName.value,
+              email: this.email.value,
+              phoneNumber: this.phoneNumber.value,
+              emailSubject: this.emailSubject.value,
+              message: this.message.value,
+            };
+      
+            // Send email using EmailJS
+            emailjs.send('service_5wxv3yp', 'template_mszsaf8', formData)
+              .then(function (response) {
+                alert('Your message has been sent successfully!');
+              }, function (error) {
+                alert('There was an error sending your message. Please check the console for more details.');
+                console.error('Error details:', error); // Log the exact error for troubleshooting
+              });
+          });
+        </script>
+      </section>
+      
+</body>
+</html>
